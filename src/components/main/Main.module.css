@@ -19,3 +19,10 @@
     width: 400px;
     height: 40px;
 }
+
+.main__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+}

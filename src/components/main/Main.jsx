@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import styles from './Main.module.css'
 import {Card, CardContent, Typography, Box, TextField} from '@mui/material'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import {getMovies} from "../../api/getMovies.js";
 
 const Main = () => {
-    
-    const [inputValue, setInputValue] = useState('');
-    
+
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+
+        const fetchData = async() => {
+            const data = await getMovies();
+            //console.log(data.docs);
+            setMovies(data.docs);
+        }
+        fetchData();
+    }, []);
+
     return (
         <>
             <main className={styles.container}>
@@ -15,19 +26,22 @@ const Main = () => {
                         <TextField sx={{width: 400}} id="outlined-basic" label="Название фильма" variant="outlined" />
                         <DensityMediumIcon sx={{height: 50}} />
                     </div>
-                    
 
-                    <Card sx={{maxWidth: 220}}>
-                        <CardContent>
-                            <Box component={'img'} src='https://marketplace.canva.com/EAFTl0ixW_k/1/0/1131w/canva-black-white-minimal-alone-movie-poster-YZ-0GJ13Nc8.jpg'/>
-                            <Typography component={'div'}>
-                                Название
-                            </Typography>
-                            <Typography>
-                                2025 г.
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <div className={styles.main__items}>
+                        {movies.map(m =>
+                            <Card key={m.id} sx={{maxWidth: 220}}>
+                                <CardContent>
+                                    <Typography component={'div'}>
+                                        {m.name === null ? m.alternativeName : m.name}
+                                    </Typography>
+                                    <Typography>
+                                        m.year
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+
+                        )}
+                    </div>
                 </section>    
             </main>          
         </>

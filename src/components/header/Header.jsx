@@ -1,21 +1,13 @@
 import styles from './Header.module.css'
 import TheatersIcon from '@mui/icons-material/Theaters';
 import Button from '@mui/material/Button';
-import WebFont from 'webfontloader'
-import {useEffect} from 'react'
+
 
 const Header = () => {
     
     const headers = ['Фильмы', 'Афиша', 'Цены', 'Адрес', 'О нас'];
-    
-    useEffect(() => {
-        WebFont.load({
-          google: {
-            families: ['Poppins',]
-          }
-        });
-       }, []);
-   
+
+
     return (
         <>
             <header className={styles.header}>
