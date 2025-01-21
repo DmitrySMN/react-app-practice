@@ -23,6 +23,6 @@
 .main__items {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 40px;
     justify-content: center;
 }

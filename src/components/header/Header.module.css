@@ -19,13 +19,14 @@ img, picture, video, canvas, svg {
     padding-top: 32px;
     color: white;
     height: 400px;
-    background: rgb(21,98,130);
-    background: linear-gradient(45deg, rgba(21,98,130,1) 0%, rgba(10,21,56,1) 35%);
+    background-image: url('public/header-bg-2.png');
+    background-size: cover;
+    background-position: center center;
     border-radius: 0 0 30px 30px;
 }
 
 .header a {
-    color: white;
+    color: #fff;
     background-image: linear-gradient(currentColor, currentColor);
     background-position: 0% 100%;
     background-repeat: no-repeat;
@@ -44,6 +45,7 @@ img, picture, video, canvas, svg {
 }
 
 .nav {
+    font-size: 20px;
     display: flex;
     justify-content: space-between;
     height: 100%;

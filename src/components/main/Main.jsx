@@ -4,6 +4,7 @@ import {Card, CardContent, Typography, Box, TextField} from '@mui/material'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import {getMovies} from "../../api/getMovies.js";
 
+
 const Main = () => {
 
     const [movies, setMovies] = useState([]);
@@ -27,15 +28,19 @@ const Main = () => {
                         <DensityMediumIcon sx={{height: 50}} />
                     </div>
 
+                    <div>
+                        <h2>Топ 10 случайных фильмов</h2>
+                    </div>
+
                     <div className={styles.main__items}>
                         {movies.map(m =>
-                            <Card key={m.id} sx={{maxWidth: 220}}>
+                            <Card key={m.id} sx={{width: 220}}>
                                 <CardContent>
                                     <Typography component={'div'}>
                                         {m.name === null ? m.alternativeName : m.name}
                                     </Typography>
                                     <Typography>
-                                        m.year
+                                        {m.year === null ? "Год неизвестен" : m.year + " г." }
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -43,7 +48,8 @@ const Main = () => {
                         )}
                     </div>
                 </section>    
-            </main>          
+            </main>
+
         </>
     );
 }

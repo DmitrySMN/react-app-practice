@@ -1,7 +1,7 @@
 import styles from './Header.module.css'
 import TheatersIcon from '@mui/icons-material/Theaters';
 import Button from '@mui/material/Button';
-
+import ModalWindow from "../modal/ModalWindow.jsx";
 
 const Header = () => {
     
@@ -21,9 +21,7 @@ const Header = () => {
                            <li className={styles.navlist__item}><a href="">{h}</a></li>)}
                         </ul>
                         <div className={styles.login}>
-                            <Button style={{
-                                padding: 0,
-                            }} variant='contained' disableElevation  color='black'>LogIn</Button>
+                            <ModalWindow />
                         </div>
                     </nav>
                     <div className={styles.header__content}>
