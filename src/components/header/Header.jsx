@@ -1,45 +1,49 @@
-import {AppBar, Toolbar, IconButton, Typography, createTheme, ThemeProvider, Stack, Button} from '@mui/material';
-import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
-import {yellow, cyan} from '@mui/material/colors';
-
+import styles from './Header.module.css'
+import TheatersIcon from '@mui/icons-material/Theaters';
+import Button from '@mui/material/Button';
+import WebFont from 'webfontloader'
+import {useEffect} from 'react'
 
 const Header = () => {
-     const theme = createTheme({
-         palette: {
-             primary: cyan,
-             secondary: {main: yellow[300]},
-         },
-
-         components: {
-            MuiAppBar: {
-                defaultProps: {
-                    elevation: 0
-                }
-            }
-         }
-    });
-
+    
+    const headers = ['Фильмы', 'Афиша', 'Цены', 'Адрес', 'О нас'];
+    
+    useEffect(() => {
+        WebFont.load({
+          google: {
+            families: ['Poppins',]
+          }
+        });
+       }, []);
+   
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <AppBar color="primary">
-                    <Toolbar>
-                        <IconButton size='large' edge='start' color='inherit' aria-label='logo'>
-                            <CurrencyBitcoinIcon />
-                        </IconButton>
-                        <Typography variant='h6' component={'div'} sx={{flexGrow: 1}}>
-                            CRYPTOAPP
-                        </Typography>
-                        <Stack direction='row' spacing={2} >
-                            <Button color='inherit'>Cryptocurrency</Button>
-                            <Button color='inherit'>Pricing</Button>
-                            <Button color='inherit'>About</Button>
-                            <Button color='inherit'>LogIn</Button>
-                        </Stack>
-                    </Toolbar>
-                </AppBar>
-            </ThemeProvider>
-            
+            <header className={styles.header}>
+                <div className={styles.container}>
+                    <nav className={styles.nav}>
+                        <a href="" className={styles.logo}>
+                            <TheatersIcon />
+                        </a>
+                        <ul className={styles.navlist}>
+                           {headers.map(h => 
+                           <li className={styles.navlist__item}><a href="">{h}</a></li>)}
+                        </ul>
+                        <div className={styles.login}>
+                            <Button style={{
+                                padding: 0,
+                            }} variant='contained' disableElevation  color='black'>LogIn</Button>
+                        </div>
+                    </nav>
+                    <div className={styles.header__content}>
+                        <h1 className={styles.header__title}>Какой-то текст про фильмы</h1>
+                        <Button style={{
+                            width: 150,
+                            height:50
+                        }} variant='contained'>Кнопка</Button>
+                    </div>
+                </div>   
+            </header> 
+               
         </>
     );
 }

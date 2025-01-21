@@ -1,10 +1,11 @@
 import Header from '../../components/header/Header.jsx'
-import styles from './Home.module.css'
+import Main from "../../components/main/Main.jsx";
 
 const Home = () => {
   return (
-    <div className={styles.container}>
+    <div>
         <Header />
+        <Main />
     </div>
   );
 }
