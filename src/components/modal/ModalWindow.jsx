@@ -5,6 +5,7 @@ import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
+import {Link} from "react-router-dom";
 
 const ModalWindow = () => {
 
@@ -12,7 +13,7 @@ const ModalWindow = () => {
 
     return (
         <>
-            <Button variant="outlined" onClick={() => setIsOpen(true)}>
+            <Button sx={{width: 100}} variant="outlined" onClick={() => setIsOpen(true)}>
                 Вход
             </Button>
             <Modal

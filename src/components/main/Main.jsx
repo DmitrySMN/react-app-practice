@@ -30,7 +30,9 @@ const Main = () => {
                     </div>
 
                     <div>
-                        <h2>Топ 10 случайных фильмов</h2>
+                        <Typography>
+                            <h2>Топ 10 случайных фильмов</h2>
+                        </Typography>
                     </div>
 
                     {/* <div className={styles.main__items}>

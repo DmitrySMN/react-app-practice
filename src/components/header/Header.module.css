@@ -27,16 +27,8 @@ img, picture, video, canvas, svg {
 
 .header a {
     color: #fff;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 2px;
-    transition: background-size .3s;
+
 }
-.header a:hover {
-    background-size: 100% 2px;
-  
-  }
 
 .container {
     max-width: 1440px;
@@ -49,12 +41,25 @@ img, picture, video, canvas, svg {
     display: flex;
     justify-content: space-between;
     height: 100%;
+
 }
 .navlist {
     display: flex;
     column-gap: 50px;
-    color: black;
 }
+
+.navlist__item {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+}
+
+.navlist__item:hover {
+    background-size: 100% 2px;
+}
+
 
 .login__button {
     background-color: beige;
