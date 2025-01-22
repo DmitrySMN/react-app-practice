@@ -28,7 +28,7 @@ const Header = () => {
                         </ul>
                         <div className={styles.login}>
                             <Link to='/login'>
-                                <Button sx={{color: 'white'}} variant='outlined'>
+                                <Button sx={{color: 'white', margin: 0}} variant='outlined'>
                                     <Typography>Войти</Typography>
                                 </Button>
                             </Link>
