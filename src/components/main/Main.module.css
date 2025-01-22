@@ -21,8 +21,19 @@
 }
 
 .main__items {
+    padding-top: 7vh;
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
     justify-content: center;
 }
+
+.main_items-item {
+    transition:all 0.5s;
+}
+
+.main_items-item:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 8px 0px rgb(190, 189, 189);
+}
+

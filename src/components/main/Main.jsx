@@ -10,10 +10,11 @@ const Main = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
+        
+        let page = Math.random() * (10500 - 1) + 1;
 
-        const fetchData = async() => {
-            const data = await getMovies();
-            //console.log(data.docs);
+        const fetchData = async() => {  
+            const data = await getMovies(page);
             setMovies(data.docs);
         }
         fetchData();
@@ -34,17 +35,22 @@ const Main = () => {
 
                     <div className={styles.main__items}>
                         {movies.map(m =>
-                            <Card key={m.id} sx={{width: 220}}>
+                            <Card className={styles["main_items-item"]} key={m.id} sx={{width: 220}}>
                                 <CardContent>
+
+                                    <Box component={'img'} src='https://marketplace.canva.com/EAFTl0ixW_k/1/0/1131w/canva-black-white-minimal-alone-movie-poster-YZ-0GJ13Nc8.jpg'/>
+
                                     <Typography component={'div'}>
-                                        {m.name === null ? m.alternativeName : m.name}
+                                        <b>{m.name === null ? m.alternativeName : m.name}</b>
                                     </Typography>
                                     <Typography>
                                         {m.year === null ? "Год неизвестен" : m.year + " г." }
                                     </Typography>
+
+                                        {m.genres.map(g => <Typography color='blue'>{g.name}</Typography> )}     
+
                                 </CardContent>
                             </Card>
-
                         )}
                     </div>
                 </section>    
