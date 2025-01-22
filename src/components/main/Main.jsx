@@ -33,7 +33,7 @@ const Main = () => {
                         <h2>Топ 10 случайных фильмов</h2>
                     </div>
 
-                    <div className={styles.main__items}>
+                    {/* <div className={styles.main__items}>
                         {movies.map(m =>
                             <Card className={styles["main_items-item"]} key={m.id} sx={{width: 220}}>
                                 <CardContent>
@@ -52,7 +52,7 @@ const Main = () => {
                                 </CardContent>
                             </Card>
                         )}
-                    </div>
+                    </div> */}
                 </section>    
             </main>
 
