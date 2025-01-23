@@ -27,7 +27,7 @@ img, picture, video, canvas, svg {
 
 .header a {
     color: #fff;
-
+    text-decoration: none;
 }
 
 .container {
@@ -76,6 +76,5 @@ img, picture, video, canvas, svg {
 .header__title {
     text-align: center;
     font-weight: 600;
-    font-size: 48px;
     line-height: 1.3;
 }

@@ -5,6 +5,17 @@ body {
     min-height: 100vh;
 }
 
+.back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.back__button {
+    background: transparent;
+    cursor: pointer;
+}
+
 .wrapper {
     width: 400px;
 }
