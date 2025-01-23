@@ -1,8 +1,9 @@
-body {
+.hhh {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 
 .back {
@@ -77,4 +78,3 @@ a {
     padding-top: 15px;
     font-size: 18px;
 }
-

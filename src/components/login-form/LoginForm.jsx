@@ -5,7 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const LoginForm = () => {
   return (
-    <div>
+    <div className={styles.hhh}>
       <div className={styles.back}>
         <Link to="/">
           <button className={styles.back__button}>
