@@ -10,26 +10,26 @@ import { BeatLoader } from "react-spinners";
 const Main = () => {
     const [movies, setMovies] = useState([]);
     const [title, setTitle] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(!loading);
-        }, 2000);
-
-        let randomPage = Math.random() * (10500 - 1) + 1;
-
-        const fetchData = async () => {
-            const data = await getMovies(randomPage);
-            setMovies(data.docs);
-        };
-        fetchData();
+        // setTimeout(() => {
+        //     setLoading(!loading);
+        // }, 2000);
+        // let randomPage = Math.random() * (10500 - 1) + 1;
+        //
+        // const fetchData = async () => {
+        //     const data = await getMovies(randomPage);
+        //     setMovies(data.docs);
+        // };
+        // fetchData();
     }, []);
 
     const handleInput = async () => {
         // setTimeout(() => {
         //     setLoading(!loading);
-        // }, 2000);
+        // }, 1000);
+        // setLoading(!loading);
         const data = await getMovieByTitle(title);
         setMovies(data.docs);
     };
@@ -52,7 +52,7 @@ const Main = () => {
                             <button
                                 className={styles["main__search-button"]}
                                 type={"submit"}
-                                onClick={handleInput()}
+                                onClick={handleInput}
                             >
                                 Найти
                             </button>
@@ -62,9 +62,9 @@ const Main = () => {
                     </div>
 
                     <div>
-                        <Typography>
-                            <h2>Топ 10 популярных фильмов</h2>
-                        </Typography>
+                        {/*<Typography>*/}
+                        {/*    <h2>Топ 10 популярных фильмов</h2>*/}
+                        {/*</Typography>*/}
                     </div>
                     <div className={styles.main__loading}>
                         <BeatLoader loading={loading} />
