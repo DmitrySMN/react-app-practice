@@ -12,16 +12,16 @@ const Main = () => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(!loading);
-    }, 800);
-    const fetchData = async () => {
-      const data = await getPremiereMovies();
-      setMovies(data);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(!loading);
+  //   }, 800);
+  //   const fetchData = async () => {
+  //     const data = await getPremiereMovies();
+  //     setMovies(data);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const handleInput = async () => {
     const data = await getMovieByTitle(title);
@@ -32,33 +32,34 @@ const Main = () => {
     <>
       <main className={styles.container}>
         <section className={styles.main}>
-          <div className={styles.main__search}>
-            <div className={styles["main__search-wrapper"]}>
-              <input
-                className={styles["main__search-field"]}
-                type="text"
-                placeholder={"Название фильма"}
-                value={title}
-                onChange={(event) => {
-                  setTitle(event.target.value);
-                }}
-              />
-              <button
-                className={styles["main__search-button"]}
-                type={"submit"}
-                onClick={handleInput}
-              >
-                Найти
-              </button>
-            </div>
+          {/*<div className={styles.main__search}>*/}
+          {/*  <div className={styles["main__search-wrapper"]}>*/}
+          {/*    <input*/}
+          {/*      className={styles["main__search-field"]}*/}
+          {/*      type="text"*/}
+          {/*      placeholder={"Название фильма"}*/}
+          {/*      value={title}*/}
+          {/*      onChange={(event) => {*/}
+          {/*        setTitle(event.target.value);*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*    <button*/}
+          {/*      className={styles["main__search-button"]}*/}
+          {/*      type={"submit"}*/}
+          {/*      onClick={handleInput}*/}
+          {/*    >*/}
+          {/*      Найти*/}
+          {/*    </button>*/}
+          {/*  </div>*/}
 
-            <DensityMediumIcon sx={{ height: 50 }} />
-          </div>
+          {/*  <DensityMediumIcon sx={{ height: 50 }} />*/}
+          {/*</div>*/}
 
-          <div>
+          <div className={styles["main__title-content"]}>
             <Typography>
               <h2>Премьеры в январе 2025</h2>
             </Typography>
+            <DensityMediumIcon sx={{ height: 50 }} />
           </div>
           {loading ? (
             <div className={styles.main__loading}>

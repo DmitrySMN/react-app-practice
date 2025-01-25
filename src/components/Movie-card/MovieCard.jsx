@@ -1,4 +1,4 @@
-import styles from "../Main/Main.module.css";
+import styles from "./MovieCard.module.css";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { green } from "@mui/material/colors";
 
@@ -49,7 +49,7 @@ const MovieCard = ({ posterUrl, title, genres, year }) => {
 
   return (
     <>
-      <Card sx={{ width: 220 }}>
+      <Card className={styles.card} sx={{ width: 220 }}>
         <CardContent>
           <Box component={"img"} src={posterUrl} />
           <Typography component={"div"}>
