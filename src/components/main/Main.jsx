@@ -1,35 +1,29 @@
 import { useEffect, useState } from "react";
 import styles from "./Main.module.css";
-import { Card, CardContent, Typography, Box, TextField } from "@mui/material";
+import { Typography } from "@mui/material";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import { getMovies } from "../../api/getMovies.js";
 import { getMovieByTitle } from "../../api/getMovieByTitle.js";
-import ClipLoader from "react-spinners/ClipLoader";
 import { BeatLoader } from "react-spinners";
+import MovieCard from "../Movie-card/MovieCard.jsx";
+import { getPremiereMovies } from "../../api/getPremiereMovies.js";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // setTimeout(() => {
-    //     setLoading(!loading);
-    // }, 2000);
-    // let randomPage = Math.random() * (10500 - 1) + 1;
-    //
-    // const fetchData = async () => {
-    //     const data = await getMovies(randomPage);
-    //     setMovies(data.docs);
-    // };
-    // fetchData();
+    setTimeout(() => {
+      setLoading(!loading);
+    }, 800);
+    const fetchData = async () => {
+      const data = await getPremiereMovies();
+      setMovies(data);
+    };
+    fetchData();
   }, []);
 
   const handleInput = async () => {
-    // setTimeout(() => {
-    //     setLoading(!loading);
-    // }, 1000);
-    // setLoading(!loading);
     const data = await getMovieByTitle(title);
     setMovies(data.docs);
   };
@@ -66,37 +60,23 @@ const Main = () => {
               <h2>Премьеры в январе 2025</h2>
             </Typography>
           </div>
-          <div className={styles.main__loading}>
-            <BeatLoader loading={loading} />
-          </div>
-
-          <div className={styles.main__items}>
-            {movies.map((m) => (
-              <Card
-                className={styles["main_items-item"]}
-                key={m.id}
-                sx={{ width: 220 }}
-              >
-                <CardContent>
-                  <Box component={"img"} src={m.poster.url} />
-
-                  <Typography component={"div"}>
-                    <b>{m.name === null ? m.alternativeName : m.name}</b>
-                  </Typography>
-                  <Typography>
-                    {m.year === null ? "Год неизвестен" : m.year + " г."}
-                  </Typography>
-
-                  {m.genres.map((g) => (
-                    <Typography color="blue">{g.name}</Typography>
-                  ))}
-                  {/*<button className={styles["favorite-btn"]}>*/}
-                  {/*    ♥*/}
-                  {/*</button>*/}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {loading ? (
+            <div className={styles.main__loading}>
+              <BeatLoader loading={loading} />
+            </div>
+          ) : (
+            <div className={styles.main__items}>
+              {movies.map((m) => (
+                <MovieCard
+                  key={m.kinopoiskId}
+                  posterUrl={m.posterUrl}
+                  title={m.nameRu}
+                  genres={m.genres}
+                  year={m.premiereRu}
+                />
+              ))}
+            </div>
+          )}
         </section>
       </main>
     </>
