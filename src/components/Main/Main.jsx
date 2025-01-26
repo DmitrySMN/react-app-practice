@@ -12,16 +12,16 @@ const Main = () => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(!loading);
-  //   }, 800);
-  //   const fetchData = async () => {
-  //     const data = await getPremiereMovies();
-  //     setMovies(data);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(!loading);
+    }, 800);
+    const fetchData = async () => {
+      const data = await getPremiereMovies();
+      setMovies(data);
+    };
+    fetchData();
+  }, []);
 
   const handleInput = async () => {
     const data = await getMovieByTitle(title);

@@ -42,15 +42,22 @@ const Header = () => {
                 />
               </p>
             </Typography>
-            <Button
-              style={{
-                width: 150,
-                height: 50,
-              }}
-              variant="contained"
-            >
-              Кнопка
-            </Button>
+            <div className={styles.header__search}>
+              <input
+                className={styles["header__search-input"]}
+                type="text"
+                placeholder={"Введите название фильма"}
+              />
+            </div>
+            {/*<Button*/}
+            {/*  style={{*/}
+            {/*    width: 150,*/}
+            {/*    height: 50,*/}
+            {/*  }}*/}
+            {/*  variant="contained"*/}
+            {/*>*/}
+            {/*  Кнопка*/}
+            {/*</Button>*/}
           </div>
         </div>
       </header>
