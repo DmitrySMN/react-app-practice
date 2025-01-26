@@ -94,3 +94,30 @@ svg {
   border-radius: 8px;
   padding: 20px 45px 20px 20px;
 }
+
+.header__search-results {
+  width: 100%;
+  background-color: #fff;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  max-height: 150px;
+  margin-top: 1vh;
+  overflow-y: scroll;
+  border: 1px #3e3e3e solid;
+}
+
+.header__search-results__item {
+  padding: 10px;
+}
+
+.header__search-results__item:hover {
+  background-color: #afaeae;
+  cursor: pointer;
+}
+
+.header__search-results__item {
+  display: flex;
+  gap: 20px;
+}

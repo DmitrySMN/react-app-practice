@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Main.module.css";
 import { Typography } from "@mui/material";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import { getMovieByTitle } from "../../api/getMovieByTitle.js";
+import { getMovieByKeyWords } from "../../api/getMovieByKeyWords.js";
 import { BeatLoader } from "react-spinners";
 import MovieCard from "../Movie-card/MovieCard.jsx";
 import { getPremiereMovies } from "../../api/getPremiereMovies.js";
@@ -22,11 +22,6 @@ const Main = () => {
     };
     fetchData();
   }, []);
-
-  const handleInput = async () => {
-    const data = await getMovieByTitle(title);
-    setMovies(data.docs);
-  };
 
   return (
     <>

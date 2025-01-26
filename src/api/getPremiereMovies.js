@@ -1,5 +1,4 @@
 import axios from "axios";
-import { configDotenv } from "dotenv";
 
 const KEY = import.meta.env.VITE_KINOPOISK_API_KEY;
 // const URL = import.meta.env.VITE_KINOPOISK_PREMIER_MOVIES;

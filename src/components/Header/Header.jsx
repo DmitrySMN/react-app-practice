@@ -2,11 +2,26 @@ import styles from "./Header.module.css";
 import TheatersIcon from "@mui/icons-material/Theaters";
 import Button from "@mui/material/Button";
 import { ReactTyped } from "react-typed";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { getMovieByKeyWords } from "../../api/getMovieByKeyWords.js";
 
 const Header = () => {
   const headers = ["Фильмы", "Афиша", "Цены", "Адрес", "О нас"];
+  const [searchMovies, setSearchMovies] = useState([]);
+  const [input, setInput] = useState("");
+
+  const handleInput = async (value) => {
+    if (value) {
+      setInput(value);
+      setSearchMovies(await getMovieByKeyWords(input));
+      console.log(searchMovies);
+    } else {
+      setInput("");
+      setSearchMovies([]);
+    }
+  };
 
   return (
     <>
@@ -47,7 +62,37 @@ const Header = () => {
                 className={styles["header__search-input"]}
                 type="text"
                 placeholder={"Введите название фильма"}
+                value={input}
+                onChange={(e) => handleInput(e.target.value)}
               />
+
+              {searchMovies ? (
+                <div className={styles["header__search-results"]}>
+                  <ul>
+                    {searchMovies.map((m) => (
+                      <div
+                        className={styles["header__search-results__item"]}
+                        key={m.filmId}
+                      >
+                        <div>
+                          <Box
+                            sx={{ width: 40 }}
+                            component={"img"}
+                            src={m.posterUrl}
+                          />
+                        </div>
+                        <div>
+                          {m.nameRu}
+                          <br />
+                          <span style={{ color: "lawngreen" }}>{m.rating}</span>
+                          <span>{" " + m.year + "г."}</span>
+                          <span>{" " + m.genres[0].genre.toUpperCase()}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </div>
             {/*<Button*/}
             {/*  style={{*/}
