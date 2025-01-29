@@ -3,12 +3,18 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import axios from 'axios';
 
 const LoginForm = () => {
-  const { register, handleSubmit, formState } = useForm({ mode: 'onchange' });
-  const onSubmit = (data) => {};
+  const { register, handleSubmit, formState } = useForm({ mode: 'onSubmit' });
+  const [registration, setRegistration] = useState(false);
 
-  const emailError = formState.errors['email']?.message;
+  const onSubmit = async (data) => {
+    const response = await axios.post('http://localhost:3000/api/users', data);
+    console.log(response);
+  };
+  // const emailError = formState.errors['email']?.message;
 
   return (
     <div className={styles.hhh}>
@@ -23,7 +29,9 @@ const LoginForm = () => {
       <div className={styles.wrapper}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <Typography>
-            <h1 className={styles.form__title}>Вход</h1>
+            <h1 className={styles.form__title}>
+              {registration ? 'Регистрация' : 'Вход'}
+            </h1>
           </Typography>
 
           <div className={styles['form__input-box']}>
@@ -41,9 +49,22 @@ const LoginForm = () => {
               type="email"
             />
           </div>
-          {emailError && <p>{emailError}</p>}
+
+          {registration ? (
+            <div className={styles['form__input-box']}>
+              <input
+                {...register('username')}
+                className={styles['form__input-field']}
+                type="text"
+                placeholder={'Имя пользователя'}
+                required
+              />
+            </div>
+          ) : null}
+
           <div className={styles['form__input-box']}>
             <input
+              {...register('password')}
               className={styles['form__input-field']}
               type="password"
               placeholder={'Пароль'}
@@ -64,10 +85,16 @@ const LoginForm = () => {
           </div>
 
           <button className={styles.form__button} type="submit">
-            Войти
+            {registration ? 'Далее' : 'Войти'}
           </button>
 
-          <div className={styles.form__register}>
+          <div
+            onClick={(event) => {
+              event.preventDefault();
+              setRegistration(!registration);
+            }}
+            className={styles.form__register}
+          >
             <Typography>
               <p>
                 Первый раз здесь? <a href="">Регистрация</a>

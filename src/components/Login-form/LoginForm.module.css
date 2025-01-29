@@ -74,6 +74,10 @@ a {
   cursor: pointer;
 }
 
+.form__button:hover {
+  opacity: 0.9;
+}
+
 .form__register {
   text-align: center;
   padding-top: 15px;
