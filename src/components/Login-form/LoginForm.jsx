@@ -3,18 +3,25 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
+import { Context } from '../../main';
+import { observer } from 'mobx-react-lite';
 
 const LoginForm = () => {
-  const { register, handleSubmit, formState } = useForm({ mode: 'onSubmit' });
+  const { register, handleSubmit, formState, getValues } = useForm({
+    mode: 'onSubmit',
+  });
   const [registration, setRegistration] = useState(false);
+  const { store } = useContext(Context);
 
   const onSubmit = async (data) => {
-    const response = await axios.post('http://localhost:3000/api/users', data);
-    console.log(response);
+    // const response = await axios.post(
+    //   'http://localhost:3000/api/users/users',
+    //   data,
+    // );
+    // console.log(response.data);
   };
-  // const emailError = formState.errors['email']?.message;
 
   return (
     <div className={styles.hhh}>
@@ -84,9 +91,31 @@ const LoginForm = () => {
             </a>
           </div>
 
-          <button className={styles.form__button} type="submit">
-            {registration ? 'Далее' : 'Войти'}
-          </button>
+          {registration ? (
+            <button
+              onClick={() =>
+                store.register(
+                  getValues('email'),
+                  getValues('username'),
+                  getValues('password'),
+                )
+              }
+              className={styles.form__button}
+              type="submit"
+            >
+              Зарегистрироваться
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                store.login(getValues('email'), getValues('password'))
+              }
+              className={styles.form__button}
+              type="submit"
+            >
+              Войти
+            </button>
+          )}
 
           <div
             onClick={(event) => {
@@ -97,7 +126,8 @@ const LoginForm = () => {
           >
             <Typography>
               <p>
-                Первый раз здесь? <a href="">Регистрация</a>
+                {registration ? 'Уже есть аккаунт?' : 'Первый раз здесь?'}
+                <a href="">{registration ? 'Войти' : 'Регистрация'}</a>
               </p>
             </Typography>
           </div>
@@ -107,4 +137,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default observer(LoginForm);
