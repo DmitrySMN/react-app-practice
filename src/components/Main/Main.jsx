@@ -52,7 +52,7 @@ const Main = () => {
 
           <div className={styles["main__title-content"]}>
             <Typography>
-              <h2>Премьеры в январе 2025</h2>
+              <h2>Премьеры в феврале 2025</h2>
             </Typography>
             <DensityMediumIcon sx={{ height: 50 }} />
           </div>

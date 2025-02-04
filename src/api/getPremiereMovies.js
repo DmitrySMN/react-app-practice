@@ -11,7 +11,7 @@ export const getPremiereMovies = async () => {
     },
   };
   const response = await axios.get(
-    `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2025&month=JANUARY`,
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2025&month=FEBRUARY`,
     options,
   );
   return response.data.items;
