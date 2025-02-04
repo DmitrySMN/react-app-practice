@@ -4,7 +4,7 @@ import { AuthService } from "../service/AuthService";
 
 export default class Store {
     
-    user = {}
+    user = {};
     isAuth = false;
 
     constructor() {
@@ -19,10 +19,15 @@ export default class Store {
         this.user = user;
     }
 
+    getUser() {
+        return this.user;
+    }
+
     async login(email, password) {
         try {
             const response = await AuthService.login(email, password);
             localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('email', response.data.email);
             this.setAuth(true);
             const {accessToken, refreshToken, ...user} = response.data;
             this.setUser(user);
@@ -35,6 +40,7 @@ export default class Store {
         try {
             const response = await AuthService.register(email, username, password);
             localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('email', response.data.email);
             this.setAuth(true);
             const {accessToken, refreshToken, ...user} = response.data;
             this.setUser(user);
@@ -45,8 +51,9 @@ export default class Store {
 
     async logout() {
         try {
-            const response = await AuthService.logout();
+            //const response = await AuthService.logout();
             localStorage.removeItem('token');
+            localStorage.removeItem('email');
             this.setAuth(false);
             this.setUser({});
         } catch(e) {

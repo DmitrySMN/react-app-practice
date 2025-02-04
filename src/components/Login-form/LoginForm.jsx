@@ -1,6 +1,6 @@
 import styles from './LoginForm.module.css';
 import { Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
 import { useContext, useState } from 'react';
@@ -14,6 +14,8 @@ const LoginForm = () => {
   });
   const [registration, setRegistration] = useState(false);
   const { store } = useContext(Context);
+
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     // const response = await axios.post(
@@ -107,8 +109,12 @@ const LoginForm = () => {
             </button>
           ) : (
             <button
-              onClick={() =>
-                store.login(getValues('email'), getValues('password'))
+              onClick={() => {
+                const user = store.login(getValues('email'), getValues('password'))
+                if (user) {
+                  navigate('/');
+                }  
+              }
               }
               className={styles.form__button}
               type="submit"
