@@ -1,10 +1,10 @@
 import $api from "../http";
 
 
-export class CurrentUserService {
+export default class CurrentUserService {
 
-    static async me() {
-        return $api.post('/auth/me');
+    static async getCurrentUserData() {
+        return $api.get('/users/me');
     }
 
 }

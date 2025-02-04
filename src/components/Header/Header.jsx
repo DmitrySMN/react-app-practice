@@ -46,8 +46,10 @@ const Header = () => {
             <div className={styles.login}>
               {localStorage.getItem('token') ? (
                 <div>
-                  <span>{localStorage.getItem('email')}</span>
-
+                  <Link to='/profile'>
+                    <span>{localStorage.getItem('email')}</span>
+                  </Link>
+                  
                   <Button
                     onClick={() => {
                       store.logout();
