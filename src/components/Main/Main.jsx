@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import styles from "./Main.module.css";
-import { Typography } from "@mui/material";
-import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import { getMovieByKeyWords } from "../../api/getMovieByKeyWords.js";
-import { BeatLoader } from "react-spinners";
-import MovieCard from "../Movie-card/MovieCard.jsx";
-import { getPremiereMovies } from "../../api/getPremiereMovies.js";
+import { useEffect, useState } from 'react';
+import styles from './Main.module.css';
+import { Typography } from '@mui/material';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import { getMovieByKeyWords } from '../../api/getMovieByKeyWords.js';
+import { BeatLoader } from 'react-spinners';
+import MovieCard from '../Movie-card/MovieCard.jsx';
+import { getPremiereMovies } from '../../api/getPremiereMovies.js';
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Main = () => {
           {/*  <DensityMediumIcon sx={{ height: 50 }} />*/}
           {/*</div>*/}
 
-          <div className={styles["main__title-content"]}>
+          <div className={styles['main__title-content']}>
             <Typography>
               <h2>Премьеры в феврале 2025</h2>
             </Typography>
@@ -69,6 +69,7 @@ const Main = () => {
                   title={m.nameRu}
                   genres={m.genres}
                   year={m.premiereRu}
+                  id={m.kinopoiskId}
                 />
               ))}
             </div>
