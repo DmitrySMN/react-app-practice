@@ -46,14 +46,14 @@ const Header = () => {
             <div className={styles.login}>
               {localStorage.getItem('token') ? (
                 <div>
-                  <Link to='/profile'>
+                  <Link to="/profile">
                     <span>{localStorage.getItem('email')}</span>
                   </Link>
-                  
+
                   <Button
                     onClick={() => {
                       store.logout();
-                      window.location.reload()
+                      window.location.reload();
                     }}
                     sx={{ color: 'white', margin: 0 }}
                     variant="outlined"
