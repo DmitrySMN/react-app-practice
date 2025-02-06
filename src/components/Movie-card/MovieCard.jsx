@@ -49,15 +49,18 @@ const MovieCard = ({ posterUrl, title, genres, year, id }) => {
   let formatedDate = `${splitedDate[2]} ${month} ${splitedDate[0]} г.`;
 
   const handleClick = async () => {
-    const authHeader = 'Bearer ' + localStorage.getItem('token');
-    const response = await axios.post(
-      `http://localhost:3000/api/users/favorites/${id}`,
-      {},
-      {
-        headers: { authorization: authHeader },
-      },
-    );
-    console.log(response.status);
+    try {
+      const authHeader = 'Bearer ' + localStorage.getItem('token');
+      const response = await axios.post(
+        `http://localhost:3000/api/users/favorites/${id}`,
+        {},
+        {
+          headers: { authorization: authHeader },
+        },
+      );
+    } catch (err) {
+      alert("Сначала надо войти!");
+    }
   };
 
   return (

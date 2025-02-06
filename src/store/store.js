@@ -29,6 +29,7 @@ export default class Store {
       this.setAuth(true);
       const { accessToken, refreshToken, ...user } = response.data;
       this.setUser(user);
+      return response;
     } catch (e) {
       console.log(e?.message);
     }
@@ -42,6 +43,7 @@ export default class Store {
       this.setAuth(true);
       const { accessToken, refreshToken, ...user } = response.data;
       this.setUser(user);
+      return response;
     } catch (e) {
       console.log(e?.message);
     }

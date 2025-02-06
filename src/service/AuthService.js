@@ -29,6 +29,8 @@ export class AuthService {
   }
 
   static async logout() {
-    return axios.post('http://localhost:3000/api/auth/logout');
+    return axios.post('http://localhost:3000/api/auth/logout',{}, {
+      withCredentials: true,
+    });
   }
 }

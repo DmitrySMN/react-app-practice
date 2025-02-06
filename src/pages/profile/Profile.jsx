@@ -10,6 +10,8 @@ const Profile = () => {
   const store = new Store();
   const authHeader = 'Bearer ' + localStorage.getItem('token');
 
+    const movieObj = [];
+
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get('http://localhost:3000/api/users/me', {
@@ -33,36 +35,45 @@ const Profile = () => {
         },
       );
       setMovies(moviesResponse.data.favorites);
+      console.log(movies);
     }
     fetchMoviesData();
-  }, [user]);
+  }, []);
 
-  useEffect(() => {
-    async function mapMovies() {
-      for (let i = 0; i < movies.length; i++) {
-        movies[i] = await getMovieById(movies[i]);
+    useEffect(() => {
+      async function mapMovies() {
+        for (let i = 0; i < movies.length; i++) {
+          movieObj[i] = await getMovieById(movies[i]);
+        }
       }
-    }
-    mapMovies();
-  }, [movies]);
+      mapMovies();
+      console.log(movieObj);
+    }, []);
 
   return (
-    <>
-      <h2>{user ? 'Вы авториованы как ' + user.username : 'unauthorized'}</h2>
-      <h3>Ваши любимые фильмы</h3>
-      <div>
-        {movies.map((m) => (
-          <MovieCard
-            key={m.kinopoiskId}
-            posterUrl={m.posterUrl}
-            title={m.nameRu}
-            genres={m.genres}
-            year={m.year}
-            id={m.kinopoiskId}
-          />
-        ))}
-      </div>
-    </>
+    <div>
+      {user ? (
+        <div>
+          <h2>Вы авторизованы как {user.username}</h2>
+          <h3>Ваши любимые фильмы</h3>
+          <div>
+            {movies.map((m) => (
+                // <MovieCard
+                //   key={m.kinopoiskId}
+                //   posterUrl={m.posterUrl}
+                //   title={m.nameRu}
+                //   genres={m.genres}
+                //   year={m.year}
+                //   id={m.kinopoiskId}
+                // />}
+                <li>{m}</li>
+            ))}
+          </div>
+        </div>
+      ) : (
+        'unauthorized'
+      )}
+    </div>
   );
 };
 
