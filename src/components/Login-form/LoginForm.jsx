@@ -110,10 +110,15 @@ const LoginForm = () => {
           ) : (
             <button
               onClick={() => {
-                const user = store.login(getValues('email'), getValues('password'))
-                if (user) {
-                  navigate('/');
-                }  
+                try {
+                  const user = store.login(getValues('email'), getValues('password'))
+                  if (user) {
+                    navigate('/');
+                  } 
+                } catch (e) {
+                  alert('Неверный пароль');
+                }
+              
               }
               }
               className={styles.form__button}
