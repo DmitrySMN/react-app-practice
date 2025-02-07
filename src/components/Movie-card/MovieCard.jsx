@@ -2,6 +2,7 @@ import styles from './MovieCard.module.css';
 import { Box, Card, CardContent, Typography, Button } from '@mui/material';
 import { green } from '@mui/material/colors';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const MovieCard = ({ posterUrl, title, genres, year, id }) => {
   const splitedDate = year.split('-');
@@ -59,7 +60,7 @@ const MovieCard = ({ posterUrl, title, genres, year, id }) => {
         },
       );
     } catch (err) {
-      alert("Сначала надо войти!");
+      alert('Сначала надо войти!');
     }
   };
 
@@ -67,21 +68,31 @@ const MovieCard = ({ posterUrl, title, genres, year, id }) => {
     <>
       <Card className={styles.card} sx={{ width: 220 }}>
         <CardContent>
-          <Box component={'img'} src={posterUrl} />
-          <Typography component={'div'}>
-            <b>{title}</b>
-          </Typography>
-          {genres.map((g) => (
-            <Typography color={'purple'}>{g.genre}</Typography>
-          ))}
-          <Typography color={green[300]}>{formatedDate}</Typography>
-          <Button
-            onClick={handleClick}
-            variant={'contained'}
-            sx={{ width: '100%' }}
-          >
-            В избранное
-          </Button>
+          <div>
+            <Box component={'img'} src={posterUrl} />
+            <Link
+              style={{ color: 'black', textDecoration: 'none' }}
+              to={`/movies/${id}`}
+            >
+              <Typography component={'div'}>
+                <b>{title}</b>
+              </Typography>
+            </Link>
+
+            {genres.map((g) => (
+              <Typography color={'purple'}>{g.genre}</Typography>
+            ))}
+            <Typography color={green[300]}>{formatedDate}</Typography>
+          </div>
+          <div>
+            <Button
+              onClick={handleClick}
+              variant={'contained'}
+              sx={{ width: '100%' }}
+            >
+              В избранное
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </>

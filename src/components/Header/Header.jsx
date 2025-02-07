@@ -9,9 +9,10 @@ import { getMovieByKeyWords } from '../../api/getMovieByKeyWords.js';
 import Store from '../../store/store.js';
 
 const Header = () => {
-  const headers = ['Фильмы', 'Афиша', 'Цены', 'Адрес', 'О нас'];
+  const headers = ['Премьеры', 'Актеры', 'Поиск', 'О нас'];
   const [searchMovies, setSearchMovies] = useState([]);
   const [input, setInput] = useState('');
+  const [searchActive, setSearchActive] = useState(false);
 
   const store = new Store();
 
@@ -74,32 +75,35 @@ const Header = () => {
                 type="text"
                 placeholder={'Введите название фильма'}
                 value={input}
+                onFocus={() => setSearchActive(true)}
+                onBlur={() => setSearchActive(false)}
                 onChange={(e) => handleInput(e.target.value)}
               />
 
-              {searchMovies ? (
+              {searchActive ? (
                 <div className={styles['header__search-results']}>
                   <ul>
                     {searchMovies.map((m) => (
-                      <div
-                        className={styles['header__search-results__item']}
-                        key={m.filmId}
-                      >
-                        <div>
-                          <Box
-                            sx={{ width: 40 }}
-                            component={'img'}
-                            src={m.posterUrl}
-                          />
+                      <Link key={m.filmId} to={`/movies/${m.kinopoiskId}`}>
+                        <div className={styles['header__search-results__item']}>
+                          <div>
+                            <Box
+                              sx={{ width: 40 }}
+                              component={'img'}
+                              src={m.posterUrl}
+                            />
+                          </div>
+                          <div style={{ color: 'black' }}>
+                            {m.nameRu}
+                            <br />
+                            <span style={{ color: 'lightseagreen' }}>
+                              {m.rating}
+                            </span>
+                            <span>{' ' + m.year + 'г.'}</span>
+                            <span>{' ' + m.genres[0].genre.toUpperCase()}</span>
+                          </div>
                         </div>
-                        <div>
-                          {m.nameRu}
-                          <br />
-                          <span style={{ color: 'lawngreen' }}>{m.rating}</span>
-                          <span>{' ' + m.year + 'г.'}</span>
-                          <span>{' ' + m.genres[0].genre.toUpperCase()}</span>
-                        </div>
-                      </div>
+                      </Link>
                     ))}
                   </ul>
                 </div>

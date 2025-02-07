@@ -12,6 +12,7 @@ import { getMovieByKeyWords } from '../../api/getMovieByKeyWords.js';
 import { BeatLoader } from 'react-spinners';
 import MovieCard from '../Movie-card/MovieCard.jsx';
 import { getPremiereMovies } from '../../api/getPremiereMovies.js';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
