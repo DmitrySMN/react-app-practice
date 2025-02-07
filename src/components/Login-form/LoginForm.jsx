@@ -1,5 +1,5 @@
 import styles from './LoginForm.module.css';
-import { Typography } from '@mui/material';
+import { Snackbar, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
@@ -14,6 +14,7 @@ const LoginForm = () => {
   });
   const [registration, setRegistration] = useState(false);
   const { store } = useContext(Context);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -109,18 +110,19 @@ const LoginForm = () => {
             </button>
           ) : (
             <button
-              onClick={() => {
+              onClick={async () => {
                 try {
-                  const user = store.login(getValues('email'), getValues('password'))
-                  if (user) {
+                  const result = await store.login(
+                    getValues('email'),
+                    getValues('password'),
+                  );
+                  if (result) {
                     navigate('/');
-                  } 
-                } catch (e) {
-                  alert('Неверный пароль');
-                }
-              
-              }
-              }
+                  } else {
+                    setOpen(true);
+                  }
+                } catch (e) {}
+              }}
               className={styles.form__button}
               type="submit"
             >
@@ -143,6 +145,12 @@ const LoginForm = () => {
             </Typography>
           </div>
         </form>
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          message="Неверный логин или пароль"
+        />
+        ;
       </div>
     </div>
   );

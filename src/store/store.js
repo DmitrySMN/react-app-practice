@@ -24,14 +24,14 @@ export default class Store {
   async login(email, password) {
     try {
       const response = await AuthService.login(email, password);
-      localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('email', response.data.email);
-      this.setAuth(true);
       const { accessToken, refreshToken, ...user } = response.data;
+      localStorage.setItem('token', accessToken);
+      localStorage.setItem('email', user.email);
+      this.setAuth(true);
       this.setUser(user);
-      return response;
+      return true;
     } catch (e) {
-      console.log(e?.message);
+      return false;
     }
   }
 

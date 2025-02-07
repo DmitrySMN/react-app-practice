@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import styles from './Main.module.css';
-import { Typography } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from '@mui/material';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import { getMovieByKeyWords } from '../../api/getMovieByKeyWords.js';
 import { BeatLoader } from 'react-spinners';
@@ -10,7 +16,10 @@ import { getPremiereMovies } from '../../api/getPremiereMovies.js';
 const Main = () => {
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState('');
+  const [season, setSeason] = useState();
   const [loading, setLoading] = useState(true);
+
+  const handleSeasonChange = () => {};
 
   useEffect(() => {
     setTimeout(() => {
@@ -54,7 +63,20 @@ const Main = () => {
             <Typography>
               <h2>Премьеры в феврале 2025</h2>
             </Typography>
-            <DensityMediumIcon sx={{ height: 50 }} />
+            <FormControl sx={{ width: '300px' }}>
+              <InputLabel id="demo-simple-select-label">Сезон</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={season}
+                label="Сезон"
+                onChange={handleSeasonChange}
+              >
+                <MenuItem value={'Январь 2025'}>Январь 2025</MenuItem>
+                <MenuItem value={'Декабрь 2024'}>Декабрь 2024</MenuItem>
+                <MenuItem value={'Ноябрь 2024'}>Ноябрь 2024</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           {loading ? (
             <div className={styles.main__loading}>

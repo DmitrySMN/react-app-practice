@@ -3,14 +3,16 @@ import axios from 'axios';
 import Store from '../../store/store.js';
 import MovieCard from '../../components/Movie-card/MovieCard.jsx';
 import { getMovieById } from '../../api/getMovieById.js';
+import { Typography } from '@mui/material';
+import LogoutButton from '../../components/Logout-button/LogoutButton.jsx';
+import styles from './Profile.module.css';
 
 const Profile = () => {
   const [user, setUser] = useState();
   const [movies, setMovies] = useState([]);
   const store = new Store();
   const authHeader = 'Bearer ' + localStorage.getItem('token');
-
-    const movieObj = [];
+  const movieObj = [];
 
   useEffect(() => {
     async function fetchData() {
@@ -35,38 +37,47 @@ const Profile = () => {
         },
       );
       setMovies(moviesResponse.data.favorites);
+      // const fff = await getMovieById(movies[1]);
+      for (let i = 0; i < movies.length; i++) {
+        movieObj[i] = await getMovieById(movies[i]);
+      }
       console.log(movies);
+      console.log(movieObj);
     }
     fetchMoviesData();
   }, []);
 
-    useEffect(() => {
-      async function mapMovies() {
-        for (let i = 0; i < movies.length; i++) {
-          movieObj[i] = await getMovieById(movies[i]);
-        }
-      }
-      mapMovies();
-      console.log(movieObj);
-    }, []);
+  // useEffect(() => {
+  //   async function mapMovies() {
+  //     for (let i = 0; i < movies.length; i++) {
+  //       movieObj[i] = await getMovieById(movies[i]);
+  //     }
+  //   }
+  //   mapMovies();
+  //   console.log(movieObj);
+  // }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       {user ? (
         <div>
-          <h2>Вы авторизованы как {user.username}</h2>
-          <h3>Ваши любимые фильмы</h3>
+          <div className={styles.profile__header}>
+            <Typography variant={'h4'}>
+              Вы авторизованы как {user.username}
+            </Typography>
+            <LogoutButton />
+          </div>
+          <Typography variant={'h6'}>Ваши избранные фильмы</Typography>
           <div>
-            {movies.map((m) => (
-                // <MovieCard
-                //   key={m.kinopoiskId}
-                //   posterUrl={m.posterUrl}
-                //   title={m.nameRu}
-                //   genres={m.genres}
-                //   year={m.year}
-                //   id={m.kinopoiskId}
-                // />}
-                <li>{m}</li>
+            {movieObj.map((m) => (
+              <MovieCard
+                key={m.kinopoiskId}
+                posterUrl={m.posterUrl}
+                title={m.nameRu}
+                genres={m.genres}
+                year={m.year}
+                id={m.kinopoiskId}
+              />
             ))}
           </div>
         </div>

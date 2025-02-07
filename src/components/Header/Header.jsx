@@ -49,17 +49,6 @@ const Header = () => {
                   <Link to="/profile">
                     <span>{localStorage.getItem('email')}</span>
                   </Link>
-
-                  <Button
-                    onClick={() => {
-                      store.logout();
-                      window.location.reload();
-                    }}
-                    sx={{ color: 'white', margin: 0 }}
-                    variant="outlined"
-                  >
-                    <Typography>Выйти</Typography>
-                  </Button>
                 </div>
               ) : (
                 <Link to="/login">

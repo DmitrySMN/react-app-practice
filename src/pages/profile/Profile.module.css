@@ -1,0 +1,11 @@
+.container {
+  max-width: 1440px;
+  padding: 0 32px;
+  margin: 0 auto;
+}
+
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
+}
