@@ -1,0 +1,13 @@
+.container {
+  max-width: 1440px;
+  padding: 0 32px;
+  margin: 0 auto;
+}
+
+.details__poster__img {
+  max-width: 330px;
+}
+
+.details {
+  display: flex;
+}

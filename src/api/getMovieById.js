@@ -15,6 +15,7 @@ export const getMovieById = async (movieId) => {
       `https://kinopoiskapiunofficial.tech/api/v2.2/films/${movieId}`,
       options,
     );
+    console.log(response.status);
     return response.data;
   } catch (err) {
     console.error(err.message);

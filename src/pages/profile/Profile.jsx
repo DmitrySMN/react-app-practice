@@ -16,13 +16,15 @@ const Profile = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('http://localhost:3000/api/users/me', {
-        headers: { authorization: authHeader },
-        withCredentials: true,
-      });
-      if (response.status !== 401) {
+      try {
+        const response = await axios.get('http://localhost:3000/api/users/me', {
+          headers: { authorization: authHeader },
+          withCredentials: true,
+        });
         const user = response.data;
         setUser(user);
+      } catch (e) {
+        store.logout();
       }
     }
     fetchData();
