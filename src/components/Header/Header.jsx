@@ -5,8 +5,8 @@ import { ReactTyped } from 'react-typed';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getMovieByKeyWords } from '../../api/getMovieByKeyWords.js';
 import Store from '../../store/store.js';
+import { MovieService } from '../../service/MovieService.js';
 
 const Header = () => {
   const headers = ['Премьеры', 'Актеры', 'Поиск', 'О нас'];
@@ -19,7 +19,7 @@ const Header = () => {
   const handleInput = async (value) => {
     if (value) {
       setInput(value);
-      setSearchMovies(await getMovieByKeyWords(input));
+      setSearchMovies(await MovieService.getMovieByKeyWords(input));
       console.log(searchMovies);
     } else {
       setInput('');

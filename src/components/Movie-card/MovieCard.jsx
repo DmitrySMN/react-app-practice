@@ -3,6 +3,7 @@ import { Box, Card, CardContent, Typography, Button } from '@mui/material';
 import { green } from '@mui/material/colors';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import FavoriteButton from '../Favorite-button/FavoriteButton.jsx';
 
 const MovieCard = ({ posterUrl, title, genres, year, id }) => {
   const splitedDate = year.split('-');
@@ -49,21 +50,6 @@ const MovieCard = ({ posterUrl, title, genres, year, id }) => {
 
   let formatedDate = `${splitedDate[2]} ${month} ${splitedDate[0]} г.`;
 
-  const handleClick = async () => {
-    try {
-      const authHeader = 'Bearer ' + localStorage.getItem('token');
-      const response = await axios.post(
-        `http://localhost:3000/api/users/favorites/${id}`,
-        {},
-        {
-          headers: { authorization: authHeader },
-        },
-      );
-    } catch (err) {
-      alert('Сначала надо войти!');
-    }
-  };
-
   return (
     <>
       <Card className={styles.card} sx={{ width: 220 }}>
@@ -85,13 +71,7 @@ const MovieCard = ({ posterUrl, title, genres, year, id }) => {
             <Typography color={green[300]}>{formatedDate}</Typography>
           </div>
           <div>
-            <Button
-              onClick={handleClick}
-              variant={'contained'}
-              sx={{ width: '100%' }}
-            >
-              В избранное
-            </Button>
+            <FavoriteButton id={id} />
           </div>
         </CardContent>
       </Card>

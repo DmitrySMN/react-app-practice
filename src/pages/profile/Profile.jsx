@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Store from '../../store/store.js';
 import MovieCard from '../../components/Movie-card/MovieCard.jsx';
-import { getMovieById } from '../../api/getMovieById.js';
 import { Typography } from '@mui/material';
 import LogoutButton from '../../components/Logout-button/LogoutButton.jsx';
 import styles from './Profile.module.css';
+import { MovieService } from '../../service/MovieService.js';
 
 const Profile = () => {
   const [user, setUser] = useState();
@@ -41,7 +41,7 @@ const Profile = () => {
       setMovies(moviesResponse.data.favorites);
       // const fff = await getMovieById(movies[1]);
       for (let i = 0; i < movies.length; i++) {
-        movieObj[i] = await getMovieById(movies[i]);
+        movieObj[i] = await MovieService.getMovieById(movies[i]);
       }
       console.log(movies);
       console.log(movieObj);

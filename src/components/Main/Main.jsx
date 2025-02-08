@@ -7,12 +7,10 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import { getMovieByKeyWords } from '../../api/getMovieByKeyWords.js';
 import { BeatLoader } from 'react-spinners';
 import MovieCard from '../Movie-card/MovieCard.jsx';
-import { getPremiereMovies } from '../../api/getPremiereMovies.js';
 import { Link } from 'react-router-dom';
+import { MovieService } from '../../service/MovieService.js';
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
@@ -27,7 +25,7 @@ const Main = () => {
       setLoading(!loading);
     }, 800);
     const fetchData = async () => {
-      const data = await getPremiereMovies();
+      const data = await MovieService.getPremiereMovies();
       setMovies(data);
     };
     fetchData();
