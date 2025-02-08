@@ -34,9 +34,18 @@ export class MovieService {
     }
   }
 
-  static async getPremiereMovies() {
+  static async getPremiereMovies(year = 2025, month = 'FEBRUARY') {
     const response = await axios.get(
-      `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2025&month=FEBRUARY`,
+      `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=${year}&month=${month}`,
+      this.options,
+    );
+    return response.data.items;
+  }
+
+  static async getSimilarMoviesById(id) {
+    const response = await axios.get(
+      `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/similars
+`,
       this.options,
     );
     return response.data.items;

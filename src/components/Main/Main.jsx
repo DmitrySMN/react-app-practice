@@ -13,69 +13,107 @@ import { Link } from 'react-router-dom';
 import { MovieService } from '../../service/MovieService.js';
 
 const Main = () => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState('');
-  const [season, setSeason] = useState();
+  const [seasonYear, setSeasonYear] = useState(2025);
+  const [seasonMonth, setSeasonMonth] = useState(
+    months[new Date().getMonth()].toUpperCase(),
+  );
   const [loading, setLoading] = useState(true);
-
-  const handleSeasonChange = () => {};
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(!loading);
     }, 800);
     const fetchData = async () => {
-      const data = await MovieService.getPremiereMovies();
+      const data = await MovieService.getPremiereMovies(
+        seasonYear,
+        seasonMonth,
+      );
       setMovies(data);
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // setTimeout(() => {
+    //   setLoading(!loading);
+    // }, 800);
+    const fetchData = async () => {
+      const data = await MovieService.getPremiereMovies(
+        seasonYear,
+        seasonMonth,
+      );
+      setMovies(data);
+    };
+    fetchData();
+  }, [seasonMonth, seasonYear]);
+
   return (
     <>
       <main className={styles.container}>
         <section className={styles.main}>
-          {/*<div className={styles.main__search}>*/}
-          {/*  <div className={styles["main__search-wrapper"]}>*/}
-          {/*    <input*/}
-          {/*      className={styles["main__search-field"]}*/}
-          {/*      type="text"*/}
-          {/*      placeholder={"Название фильма"}*/}
-          {/*      value={title}*/}
-          {/*      onChange={(event) => {*/}
-          {/*        setTitle(event.target.value);*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*    <button*/}
-          {/*      className={styles["main__search-button"]}*/}
-          {/*      type={"submit"}*/}
-          {/*      onClick={handleInput}*/}
-          {/*    >*/}
-          {/*      Найти*/}
-          {/*    </button>*/}
-          {/*  </div>*/}
-
-          {/*  <DensityMediumIcon sx={{ height: 50 }} />*/}
-          {/*</div>*/}
-
           <div className={styles['main__title-content']}>
             <Typography>
-              <h2>Премьеры в феврале 2025</h2>
+              <h2>График премьер премьер</h2>
             </Typography>
-            <FormControl sx={{ width: '300px' }}>
-              <InputLabel id="demo-simple-select-label">Сезон</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={season}
-                label="Сезон"
-                onChange={handleSeasonChange}
-              >
-                <MenuItem value={'Январь 2025'}>Январь 2025</MenuItem>
-                <MenuItem value={'Декабрь 2024'}>Декабрь 2024</MenuItem>
-                <MenuItem value={'Ноябрь 2024'}>Ноябрь 2024</MenuItem>
-              </Select>
-            </FormControl>
+            <div>
+              <FormControl sx={{ width: '200px', paddingRight: '10px' }}>
+                <InputLabel id="season-year-label">Год</InputLabel>
+                <Select
+                  labelId="season-year-label"
+                  id="season-year"
+                  value={seasonYear}
+                  label="Год"
+                  onChange={(e) => {
+                    setSeasonYear(e.target.value);
+                  }}
+                >
+                  <MenuItem value={2025}>2025</MenuItem>
+                  <MenuItem value={2024}>2024</MenuItem>
+                  <MenuItem value={2023}>2023</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl sx={{ width: '200px' }}>
+                <InputLabel id="season-month-label">Месяц</InputLabel>
+                <Select
+                  labelId="season-month-label"
+                  id="season-month"
+                  value={seasonMonth}
+                  label="Месяц"
+                  onChange={(e) => {
+                    setSeasonMonth(e.target.value);
+                  }}
+                >
+                  <MenuItem value={'JANUARY'}>Январь</MenuItem>
+                  <MenuItem value={'FEBRUARY'}>Февраль</MenuItem>
+                  <MenuItem value={'MARCH'}>Март</MenuItem>
+                  <MenuItem value={'APRIL'}>Апрель</MenuItem>
+                  <MenuItem value={'MAY'}>Май</MenuItem>
+                  <MenuItem value={'JUNE'}>Июнь</MenuItem>
+                  <MenuItem value={'JULY'}>Июль</MenuItem>
+                  <MenuItem value={'AUGUST'}>Август</MenuItem>
+                  <MenuItem value={'SEPTEMBER'}>Сентябрь</MenuItem>
+                  <MenuItem value={'OCTOBER'}>Октябрь</MenuItem>
+                  <MenuItem value={'NOVEMBER'}>Ноябрь</MenuItem>
+                  <MenuItem value={'DECEMBER'}>Декабрь</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
           </div>
           {loading ? (
             <div className={styles.main__loading}>
