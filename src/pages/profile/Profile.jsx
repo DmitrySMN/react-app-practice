@@ -12,8 +12,8 @@ const Profile = () => {
   const [movies, setMovies] = useState([]);
   const store = new Store();
   const authHeader = 'Bearer ' + localStorage.getItem('token');
-  const movieObj = [];
-
+  const [movieObjs, setMovieObjs] = useState([]);
+  const objs = [];
   useEffect(() => {
     async function fetchData() {
       try {
@@ -39,25 +39,20 @@ const Profile = () => {
         },
       );
       setMovies(moviesResponse.data.favorites);
-      // const fff = await getMovieById(movies[1]);
-      for (let i = 0; i < movies.length; i++) {
-        movieObj[i] = await MovieService.getMovieById(movies[i]);
-      }
-      console.log(movies);
-      console.log(movieObj);
     }
     fetchMoviesData();
   }, []);
 
-  // useEffect(() => {
-  //   async function mapMovies() {
-  //     for (let i = 0; i < movies.length; i++) {
-  //       movieObj[i] = await getMovieById(movies[i]);
-  //     }
-  //   }
-  //   mapMovies();
-  //   console.log(movieObj);
-  // }, []);
+  useEffect(() => {
+    async function mapMovies() {
+      for (let i = 0; i < movies.length; i++) {
+        objs[i] = await MovieService.getMovieById(movies[i]);
+      }
+      setMovieObjs(objs);
+    }
+    mapMovies();
+    console.log(movieObjs);
+  }, [movies]);
 
   return (
     <div className={styles.container}>
@@ -70,14 +65,22 @@ const Profile = () => {
             <LogoutButton />
           </div>
           <Typography variant={'h6'}>Ваши избранные фильмы</Typography>
-          <div>
-            {movieObj.map((m) => (
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              rowGap: '15px',
+              paddingTop: '30px',
+            }}
+          >
+            {movieObjs.map((m) => (
               <MovieCard
                 key={m.kinopoiskId}
                 posterUrl={m.posterUrl}
                 title={m.nameRu}
                 genres={m.genres}
-                year={m.year}
+                // year={m.year}
                 id={m.kinopoiskId}
               />
             ))}

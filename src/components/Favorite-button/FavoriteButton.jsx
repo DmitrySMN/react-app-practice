@@ -13,9 +13,9 @@ const FavoriteButton = ({ id }) => {
     try {
       const authHeader = 'Bearer ' + localStorage.getItem('token');
 
-      if (authHeader) {
-        throw new Error('unauthorized');
-      }
+      // if (authHeader) {
+      //   throw new Error('unauthorized');
+      // }
 
       const response = await axios.post(
         `http://localhost:3000/api/users/favorites/${id}`,
@@ -24,6 +24,10 @@ const FavoriteButton = ({ id }) => {
           headers: { authorization: authHeader },
         },
       );
+
+      if (response.status === 200) {
+        alert('Добавлено в избранное');
+      }
     } catch (err) {
       alert('Сначала надо войти!');
     }

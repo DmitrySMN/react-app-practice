@@ -103,7 +103,7 @@ const MovieDetails = () => {
           <div className={styles.similar__items}>
             {similar.map((m) => (
               <MovieCard
-                key={m.filmid}
+                key={m.filmId}
                 posterUrl={m.posterUrl}
                 title={m.nameRu}
                 id={m.filmId}
