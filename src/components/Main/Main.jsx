@@ -69,7 +69,7 @@ const Main = () => {
         <section className={styles.main}>
           <div className={styles['main__title-content']}>
             <Typography>
-              <h2>График премьер премьер</h2>
+              <h2>График премьер</h2>
             </Typography>
             <div>
               <FormControl sx={{ width: '200px', paddingRight: '10px' }}>

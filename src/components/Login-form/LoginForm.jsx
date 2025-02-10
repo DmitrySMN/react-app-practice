@@ -150,7 +150,6 @@ const LoginForm = () => {
           autoHideDuration={3000}
           message="Неверный логин или пароль"
         />
-        ;
       </div>
     </div>
   );

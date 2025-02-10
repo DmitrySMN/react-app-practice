@@ -3,7 +3,7 @@ import TheatersIcon from '@mui/icons-material/Theaters';
 import Button from '@mui/material/Button';
 import { ReactTyped } from 'react-typed';
 import { Box, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Store from '../../store/store.js';
 import { MovieService } from '../../service/MovieService.js';
@@ -84,7 +84,7 @@ const Header = () => {
                 <div className={styles['header__search-results']}>
                   <ul>
                     {searchMovies.map((m) => (
-                      <Link key={m.filmId} to={`/movies/${m.kinopoiskId}`}>
+
                         <div className={styles['header__search-results__item']}>
                           <div>
                             <Box
@@ -103,7 +103,7 @@ const Header = () => {
                             <span>{' ' + m.genres[0].genre.toUpperCase()}</span>
                           </div>
                         </div>
-                      </Link>
+
                     ))}
                   </ul>
                 </div>
