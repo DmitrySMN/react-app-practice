@@ -6,6 +6,9 @@ import { MovieService } from '../../service/MovieService.js';
 import FavoriteButton from '../../components/Favorite-button/FavoriteButton.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import MovieCard from '../../components/Movie-card/MovieCard.jsx';
+import {Link} from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -27,6 +30,13 @@ const MovieDetails = () => {
   return (
     <>
       <main className={styles.container}>
+      <div className={styles.back}>
+        <Link reloadDocument to="/">
+          <button className={styles.back__button}>
+            <ArrowBackIcon />
+          </button>
+        </Link>
+      </div>
         <div className={styles.details}>
           <div className={styles.details__poster}>
             <img

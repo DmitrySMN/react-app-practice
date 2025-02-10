@@ -9,6 +9,13 @@ body {
   background-color: #fff;
 }
 
+.back {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+
+}
+
 .details__poster__img {
   max-width: 330px;
 }
